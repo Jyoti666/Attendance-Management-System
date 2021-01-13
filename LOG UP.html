@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+      <head>
+              <meta name="viewport" content="width=device-width,initial-scale=1.0">
+             <title>LOG UP</title>
+             <style>
+                 body{
+                       background-color:green;
+                      overflow-x: scroll ; 
+                      overflow-y: scroll ;
+                     }
+
+                table{
+                    margin: 7%;
+                    background-color: white;
+                    width: 70%;
+                    padding:2;
+                    border-spacing: 2;
+                    overflow-x:auto;
+                    border-radius: 5px;
+                }
+                td{
+                    font-size: 25px;
+                }
+                input[type=email],input[type=password],select{
+                    border-radius: 5px;
+                    width: 90%;
+                }
+                #name{
+                  border-radius: 5px;
+                    width: 90%;
+                }
+                button{
+                    border-radius: 10px;
+                    background-color: moccasin;
+                    font-size: 30px;
+                   display: none;
+                }
+                #subj1,#subj2,#subj3{
+                  display: none;
+                }
+               #stuofsub1,#stuofsub2,#stuofsub3{
+                  display:none;
+                }
+                #btn{
+                   border-radius: 10px;
+                    background-color: moccasin;
+                    font-size: 30px; 
+                    display: inline;
+                }
+                .submit{
+                    background-color: green;
+                    color:white;
+                    border-radius: 10px;
+                    font-size: 30px;
+                }
+                a{
+                    text-decoration: none;
+                }
+                button:hover{
+                    background-color:lightgray;
+                }
+                #btn:hover{
+                    background-color:lightgray;
+                }
+                .back{
+                    background-color: gold;
+                 }
+                .back:hover{
+                    background-color: lightgreen;
+                }
+                .submit:hover{
+                    background-color: lightgreen;
+                    color:black;
+                }
+                caption{
+                    color: white;
+                }
+                .backbtn{
+                    background-color: green;
+                    color:white;
+                    border-radius: 10px;
+                    font-size: 30px;
+                }
+                .backbtn:hover{
+                    background-color: lightgreen;
+                    color:black;
+                }
+              </style>
+      </head>
+<body>
+    <div id=div>
+    <form name=form action="LOG UP.php" target="_self" method="post" onsubmit="return validating()">
+        <table align="center">
+            <caption align="top"><h1><u>Registration For New Account</u></h1></caption> 
+             <tr>
+                 <td>Enter Name:</td> 
+                 <td><input type="text" name="name" id="name" placeholder="Write your name here..." autofocus required></td>         
+            </tr>
+            <tr>
+                 <td>Enter EmailId:</td> 
+                 <td><input type="email" name="email" placeholder="Write your email-id here..."  required></td>         
+            </tr>
+            <tr>
+                <td>Enter Password:</td>
+                <td> <input type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder="Write your new password here..." required></td>
+            </tr>
+            <tr>
+                <td>Re-enter Password:</td>
+                <td> <input type="password" name="npassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" placeholder="Write your new password here..." required></td>
+            </tr>
+            <tr>
+              <td>Enter D.O.B:</td>
+              <td><input type="date" name="dob"></td>
+            <tr>
+                <td>Enter how much Subject you have taken:</td>
+                <td><select id="noofsub" name="noofsub" onchange="return subject(this)" required>
+                            <option value="Select number of subject" >Select number of subject</option>
+                            <option value="1" >1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=2 align=center>
+                      
+                      <input type="text" name="subj1" id="subj1" placeholder="Write 1st subjectname..." >
+                      <input type="number" name="stuofsub1" id="stuofsub1" placeholder="Write no. of student..">
+                      <input type="hidden" name="sub1rollhidden" id="sub1rollhidden" value="">
+                      <input type="hidden" name="sub1namehidden" id="sub1namehidden" value="">
+                      <button type="button" id="sub1" name="sub1" onclick="subject1()">Create sheet</button><br>
+                      
+               
+                      <input type="text" name="subj2" id="subj2" placeholder="Write 2nd subjectname..." >
+                      <input type="number" name="stuofsub2" id="stuofsub2" placeholder="Write no. of student..">
+                      <input type="hidden" name="sub2rollhidden" id="sub2rollhidden" value="">
+                      <input type="hidden" name="sub2namehidden" id="sub2namehidden" value="">
+                      <button type="button" id="sub2" onclick="subject2()">Create sheet</button><br>
+                
+               
+                      <input type="text" name="subj3" id="subj3" placeholder="Write 3rd subjectname...">
+                      <input type="number" name="stuofsub3" id="stuofsub3" placeholder="Write no. of student.." >
+                      <input type="hidden" name="sub3rollhidden" id="sub3rollhidden" value="">
+                      <input type="hidden" name="sub3namehidden" id="sub3namehidden" value="">
+                      <button type="button" id="sub3" onclick="subject3()" value="Subject3">Create sheet</button>
+                </td>  
+            </tr>
+            <tr><td align=center colspan=2><button type="button" onclick="location.href='LOGIN PAGE.php'" class="backbtn" style="display: inline">BACK</button><input type="Submit" name="submit"  value="SUBMIT" class="submit" method="post" onclick="return validate(document.form.email,document.form.password,document.form.npassword)"></td></tr>
+    </table>    
+    </form>
+</div>
+ <script type="text/javascript">
+          function subject(val){
+           switch(val.value){
+            case "1":
+                   document.getElementById("stuofsub1").style.display="inline";
+                   document.getElementById("stuofsub2").style.display="none";
+                   document.getElementById("stuofsub3").style.display="none";
+                   document.getElementById("subj1").style.display="inline";
+                   document.getElementById("subj2").style.display="none";
+                   document.getElementById("subj3").style.display="none";
+                   document.getElementById("sub1").style.display="inline";
+                   document.getElementById("sub2").style.display="none";
+                   document.getElementById("sub3").style.display="none";
+                   
+                   break;
+            case "2":
+                     document.getElementById("stuofsub1").style.display="inline";
+                     document.getElementById("stuofsub2").style.display="inline";
+                     document.getElementById("stuofsub3").style.display="none";
+                     document.getElementById("subj1").style.display="inline";
+                     document.getElementById("subj2").style.display="inline";
+                     document.getElementById("subj3").style.display="none";
+                     document.getElementById("sub1").style.display="inline";
+                     document.getElementById("sub2").style.display="inline";
+                     document.getElementById("sub3").style.display="none";
+                       
+                    break;
+            default:
+                    document.getElementById("stuofsub1").style.display="inline";
+                    document.getElementById("stuofsub2").style.display="inline";
+                    document.getElementById("stuofsub3").style.display="inline";
+                    document.getElementById("subj1").style.display="inline";
+                    document.getElementById("subj2").style.display="inline";
+                    document.getElementById("subj3").style.display="inline";
+                    document.getElementById("sub1").style.display="inline";
+                    document.getElementById("sub2").style.display="inline";
+                    document.getElementById("sub3").style.display="inline";
+                    
+           }   
+        
+      }
+     
+
+
+        function subject1(){
+          var totalstudent1=document.getElementById("stuofsub1").value;
+          var sub1rollno=[];
+          var sub1name=[];
+        for (var i = 1; i <= totalstudent1; i++) {
+            sub1rollno[i-1]=prompt("Enter Roll No. for student at serial no.: "+i);
+            sub1name[i-1]=prompt("Enter Name for student at serial no. :"+i).toUpperCase();
+        }
+         document.getElementById("sub1rollhidden").value= sub1rollno;
+        
+         document.getElementById("sub1namehidden").value= sub1name;
+     } 
+     function subject2(){
+       var totalstudent2=document.getElementById("stuofsub2").value;
+       var sub2rollno=[];
+       var sub2name=[];
+        for (var i = 1; i <= totalstudent2; i++) {
+            sub2rollno[i-1]=prompt("Enter Roll No. for student at serial no.: "+i);
+            sub2name[i-1]=prompt("Enter Name for student at serial no. :"+i).toUpperCase();
+        } 
+        document.getElementById("sub2rollhidden").value= sub2rollno;
+         document.getElementById("sub2namehidden").value= sub2name;
+
+     }
+     function subject3(){
+       var totalstudent3=document.getElementById("stuofsub3").value;
+       var sub3rollno=[];
+       var sub3name=[];
+        for (var i = 1; i <= totalstudent3; i++) {
+            sub3rollno[i-1]=prompt("Enter Roll No. for student at serial no.: "+i);
+            sub3name[i-1]=prompt("Enter Name for student at serial no. :"+i).toUpperCase();
+        } 
+        document.getElementById("sub3rollhidden").value= sub3rollno;
+         
+         document.getElementById("sub3namehidden").value= sub3name;
+
+     }
+
+
+
+
+        function validate(emailval,passval,npassval){
+        var noofsub=document.getElementById("noofsub").value;
+        document.getElementById("subj1").value=document.getElementById("subj1").value.toUpperCase();
+        document.getElementById("subj2").value=document.getElementById("subj2").value.toUpperCase();
+        document.getElementById("subj3").value=document.getElementById("subj3").value.toUpperCase();
+        document.getElementById("name").value=document.getElementById("name").value.toUpperCase();
+        document.getElementById("email").value=document.getElementById("email").value.toUpperCase();
+
+        
+                                        var mailformat=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                                if(emailval.value != "" && passval.value != "" && npassval.value != "" ){
+                                    if(emailval.value.match(mailformat) && passval.value == npassval.value && noofsub.value != "Select number of subject"){
+                                        alert("LOG-UP SUCCESSFUL");
+                                        return true;
+                                    }
+                                    else{
+                                        if(!emailval.value.match(mailformat) && passval.value != npassval.value && noofsub.value == "Select number of subject"){
+                                            alert("Invalid Email-id, Mismatch between password and re-enter password and must select number of subject");
+                                            return false;
+                                        }
+                                        else{
+                                            if (!emailval.value.match(mailformat) && passval.value != npassval.value) {
+                                                alert("Invalid Email-id and Mismatch between password and reenterpassword");
+                                                return false;
+                                            }
+                                            else if(!emailval.value.match(mailformat) && noofsub == "Select number of subject"){
+                                                alert("Invalid Email-id and must select number of subject");
+                                                return false;
+                                            }
+                                            else if(passval.value != npassval.value && noofsub == "Select number of subject"){
+                                              alert("Mismatch between password and reenterpassword and Must select number of subject");
+                                              return false;
+                                            }
+                                            else if(!emailval.value.match(mailformat)){
+                                              alert("Invalid Email-id");
+                                                return false;
+                                            }
+                                            else if(passval.value != npassval.value){
+                                              alert("Mismatch between password and reenterpassword");
+                                              return false;
+                                            }
+                                            else{
+                                                alert("Must select number of subject");
+                                                return false;
+                                            }
+                                        }
+                                      }
+                                    }
+                                                           
+                                }
+     
+ </script>                           
+</body>
+</html>
